@@ -13,5 +13,8 @@ module.exports = async function(req, res, next){
     const decoded = jwt.verify(token, config.get('privateKey'));
     if(!decoded.isAdmin) return res.status(403).send('Access denied. You have no authorize.');
 
+    // for testing
+    req.test = decoded;
+    
     next();
-}
+};
