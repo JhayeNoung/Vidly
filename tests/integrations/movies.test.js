@@ -2,9 +2,7 @@ const request = require('supertest');
 const {Movie} = require('../../models/movie');
 const {Genre} = require('../../models/genre');
 const mongoose = require('mongoose');
-const { before } = require('lodash');
 const { User } = require('../../models/user');
-const { date } = require('joi');
 
 describe('/api/movies', ()=>{
     let server;
@@ -191,11 +189,7 @@ describe('/api/movies', ()=>{
 
             const res = await execPut();
             expect(res.status).toBe(200);
-            // expect(res.body).toHaveProperty('title', 'updateMovie');
-            // expect(res.body.genre).toHaveProperty('_id', genreId.toHexString());
-            // expect(res.body).toHaveProperty('numberInStock', 10);
-            // expect(res.body).toHaveProperty('dailyRentalRate', 100);
-
+            expect(res.body).toHaveProperty('title', 'update-title');
         });
     })
 
