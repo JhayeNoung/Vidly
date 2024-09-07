@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose --runInBand --detectOpenHandles --testPathIgnorePatterns='integrations/genres.test.js|integrations/users.test.js|integrations/customers.test.js|integrations/movies.test.js|-integrations/rentals.test.js|units/models/user.test.js|units/middlewares/auth.test.js' "
+    "test": "jest --watchAll --verbose --runInBand --detectOpenHandles --testPathIgnorePatterns='integrations/genres.test.js|integrations/users.test.js|integrations/customers.test.js|integrations/movies.test.js|integrations/rentals.test.js|-integrations/returns.test.js|units/models/user.test.js|units/middlewares/auth.test.js' "
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "list": "^2.0.19",
     "lodash": "^4.17.21",
+    "moment": "^2.30.1",
     "mongoose": "^8.5.4",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.4",

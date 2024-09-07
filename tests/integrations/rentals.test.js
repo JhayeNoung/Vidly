@@ -76,6 +76,7 @@ describe('/api/rentals ', ()=>{
 
             const res = await execPost();
             expect(res.status).toBe(200);
+            expect(res.body.movie.numberInStock).toBe(9);
         });
     })
 })

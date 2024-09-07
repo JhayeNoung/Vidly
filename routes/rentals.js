@@ -25,11 +25,16 @@ router.post('/', auth, async(req,res)=>{
     const movie = await Movie.findById(req.body.movie);
     if(!movie) return res.status(404).send('No movie with this id.');
 
+    // decrease movie stock
+    movie.numberInStock = (movie.numberInStock-1);
+    
     // post
     const rental = new Rental({
         customer: customer,
         movie: movie,
     })
+
+    await movie.save();
 
     await rental.save();
 
