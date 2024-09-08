@@ -67,7 +67,7 @@ describe('POST/', ()=>{
         expect(res.status).toBe(404);
     });
 
-    it('should return 400 if rental has dateReturned', async ()=>{
+    it('should return 400 if rental retunred is true', async ()=>{
         rentaldb.dateReturned = new Date();
         await rentaldb.save();
         const res = await execPost();

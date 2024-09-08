@@ -16,20 +16,21 @@ router.post('/', auth, async (req, res)=>{
         'customer._id': customerId,
         'movie._id': movieId,
     });
-    if(!rental) return res.status(404).send('No retnal with these infos.');
+    if(!rental) return res.status(404).send('No rental with these infos.');
 
-    // if rental has dateReturned, return has been processed
-    if(rental.dateReturned) return res.status(400).send('The movie has been returned.');
+    // if returned is true, return has been processed
+    if(rental.dateReturned) return res.status(400).send('You have already returned this movie.');
 
-    // if not, add dateReturned, caculate rentalFee
+    // if not, add dateReturned, caculate rentalFee, update rental.movie.numberInStock
     rental.dateReturned = Date.now();
     const rentalDays = moment().diff(rental.dateOut, 'days');
     rental.rentalFee = rental.movie.dailyRentalRate*rentalDays;
+    rental.movie.numberInStock += 1;
     await rental.save();
 
     // restock movie
     await Movie.updateOne({_id: rental.movie._id}, {$inc: {numberInStock: 1} })
-    
+
     res.status(200).send(rental);
 });
 

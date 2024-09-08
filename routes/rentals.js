@@ -25,11 +25,18 @@ router.post('/', auth, async(req,res)=>{
     const movie = await Movie.findById(req.body.movie);
     if(!movie) return res.status(404).send('No movie with this id.');
 
+    // check customer already rented and or did he returned the movie
+    let rental = await Rental.findOne({
+        'customer._id': req.body.customer,
+        'movie._id': req.body.movie,
+    })
+    if(rental) return res.status(400).send('You have already rented this movie.');
+
     // decrease movie stock
     movie.numberInStock = (movie.numberInStock-1);
     
     // post
-    const rental = new Rental({
+    rental = new Rental({
         customer: customer,
         movie: movie,
     })
@@ -39,6 +46,17 @@ router.post('/', auth, async(req,res)=>{
     await rental.save();
 
     res.status(200).send(rental);
+
+})
+
+router.delete('/:id', [auth, validObjectId], async(req,res)=>{
+    // find rental 404
+    const rental = await Rental.findById(req.params.id);
+    if(!rental) return res.status(404).send('No rental with this id.');
+
+    await rental.deleteOne();
+
+    res.status(200).send('Successful delete.');
 
 })
 
