@@ -23,7 +23,7 @@ router.post('/', auth, async (req, res)=>{
 
     // if not, add dateReturned, caculate rentalFee, update rental.movie.numberInStock
     rental.dateReturned = Date.now();
-    const rentalDays = moment().diff(rental.dateOut, 'days');
+    const rentalDays = moment().diff(rental.dateOut, 'seconds');
     rental.rentalFee = rental.movie.dailyRentalRate*rentalDays;
     rental.movie.numberInStock += 1;
     await rental.save();
