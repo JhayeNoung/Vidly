@@ -6,5 +6,5 @@ const db = config.get('db');
 module.exports = function(){
     mongoose.connect(db)
         .then(()=>logger.info(`Connects to ${db}`))
-        .catch(err => logger.error(`Cannot connect to the database: ${err.message}`));   
+        .catch(err => logger.error(err.message));   
 }

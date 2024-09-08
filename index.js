@@ -13,6 +13,6 @@ require('./startup/config')();
  
 // throw new Error('injecting uncaught exception');
 
-const port = 3000 || process.env.PORT;
-const server = app.listen(port, ()=>logger.info(`Listening at port ${port}.`));
+const PORT = process.env.PORT || 3000;
+const server = app.listen(PORT, ()=>logger.info(`Listening at port ${PORT}.`));
 module.exports = server;
