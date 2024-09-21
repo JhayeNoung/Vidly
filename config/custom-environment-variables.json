@@ -1,3 +1,4 @@
 {
-    "privateKey": "project-vidly-priavatekey"
+    "db": "PROB_DB",
+    "privateKey": "PROB_PRIVATE_KEY"
 }

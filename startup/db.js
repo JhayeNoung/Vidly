@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const config = require('config');
-const logger = require('../middlewares/logger');
+const {msgLogger} = require('../middlewares/logger');
 
 const db = config.get('db');
 module.exports = function(){
     mongoose.connect(db)
-        .then(()=>logger.info(`Connects to ${db}`))
-        .catch(err => logger.error(err.message));   
+        .then(()=>msgLogger.info(`Connects to ${db}`))
+        .catch(err => msgLogger.error(err.message));   
 }
